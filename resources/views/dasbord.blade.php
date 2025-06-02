@@ -1,5 +1,5 @@
 @extends('template.main')
 
 @section('content')
-    coba
+  DASBORD
 @endsection
