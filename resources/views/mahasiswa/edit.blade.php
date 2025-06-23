@@ -36,13 +36,15 @@
                             <h3 class="card-title">Data Mahasiswa</h3>
                         </div>
                         <!-- /.card-header -->
-                        <form action="{{ url('mahasiswa') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url("mahasiswa/$mahasiswa->nim") }}" method="post" enctype="multipart/form-data">
+                            @method('put')
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nim">NIM</label>
                                     <input type="text" name="nim" id="nim"
-                                    class="form-control @error('nim') is-invalid @enderror">
+                                    class="form-control @error('nim') is-invalid @enderror"
+                                    value="{{ $mahasiswa->nim }}" disabled>
                                     @error('nim')
                                         <div class="invalid-feedback">
                                              {{ $message }}
@@ -61,7 +63,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror">
+                                    <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror"
+                                     value="{{ $mahasiswa->nama}}">
                                     @error('nama')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -70,7 +73,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tanggal_lahir">Tanggal Lahir</label>
-                                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror">
+                                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror"
+                                     value="{{ $mahasiswa->tanggal_lahir }}">
                                     @error('tanggal_lahir')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -79,7 +83,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="telepon">telepon</label>
-                                    <input type="text" name="telepon" id="telepon" class="form-control @error('telepon') is-invalid @enderror">
+                                    <input type="text" name="telepon" id="telepon" class="form-control @error('telepon') is-invalid @enderror"
+                                     value="{{ $mahasiswa->telepon }}">
                                     @error('telepon')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -88,7 +93,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror">
+                                    <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
+                                    value="{{ $mahasiswa->email}}">
                                     @error('email')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -98,8 +104,10 @@
                                 <div class="form-group">
                                     <label for="id" class="form-label">Prodi</label>
                                     <select class="form-select" name="id" id="id">
-                                        @foreach ($prodi as $p)
-                                            <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                                        @foreach ($prodi as $p);
+                                            <option value="{{ $p->id }}"
+                                                {{ $p->id ==$mahasiswa->id ? 'SELECTED' : '' }}>
+                                                {{ $p->nama }}</option>
                                         @endforeach
                                     </select>
                                 </div>
